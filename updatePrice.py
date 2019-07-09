@@ -25,7 +25,7 @@ def updatePrice(modelUrl):
 #		print e.fp.read()
 	#content = page.read()
 
-	#print content
+	 #print content
   html = requests.get(modelUrl).content
   soup = BeautifulSoup(html, "html5lib")
   print soup.select('.product-details_price')[0].text
