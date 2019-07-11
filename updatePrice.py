@@ -1,12 +1,30 @@
 #!/usr/bin/env python3
 
-#import statements beautiful, requests, urllib2 for scrape mysql connector for database
+#import statements beautiful, requests, urllib2 for scrape mysql connector for database, anticaptcha to bypass captcha
 from bs4 import BeautifulSoup
 import requests
+from forcediphttpsadapter.adapters import ForcedIPHTTPSAdapter
 import urllib2, cookielib
 import mysql.connector
+import time
+#from python_anticaptcha import AnticaptchaClient, NoCaptchaTaskProxylessTask
+import cfscrape
+import certifi
+import urllib3
 
 
+https = urllib3.PoolManager( cert_reqs='CERT_REQUIRED', ca_certs=certifi.where())
+
+
+#This method adds a certificate for processing from https adresses
+
+
+
+#api_key = '174faff8fbc769e94a5862391ecfd010'
+#site_key = '6Le-wvkSAAAAAPBMRTvw0Q4Muexq9bi0DJwx_mJ-'  # grab from site
+#url = 'https://www.google.com/recaptcha/api2/demo'
+
+cfscrape.DEFAULT_CIPHERS =  'TLS_AES_256_GCM_SHA384:TLS_AES_256_GCM_SHA384'
 
 
 def updatePrice(modelUrl):
@@ -26,9 +44,11 @@ def updatePrice(modelUrl):
 	#content = page.read()
 
 	 #print content
-  html = requests.get(modelUrl).content
-  soup = BeautifulSoup(html, "html5lib")
-  print soup.select('.product-details_price')[0].text
+	html = requests.Session()
+	html.mount(modelUrl, ForcedIPHTTPSAdapter(dest_ip='1.2.3.4'))
+	response = html.get(modelUrl  , headers={'Host': modelUrl}, verify=False) # cfscrape.create_scraper() #requests.get(modelUrl).content
+  #soup =             # html.get(modelUrl) #BeautifulSoup(html, "html5lib")
+	print response
 
 db = mysql.connector.connect(
 	host="localhost",
@@ -64,6 +84,8 @@ for x in dbContainerNamed:
 	#updatedPrice=updatePrice(dbContainerNamed[x])
 	#print x
 	updatePrice(x)
+	print "Through loop"
+	time.sleep(90)
 #	dbCursor.execute("Update models set price_usd= " . updatedPrice[1:] .  "where names= " . dbContainer[x[1]])
 
 			# testing print print dbContainerNamed['Ork Boyz']
