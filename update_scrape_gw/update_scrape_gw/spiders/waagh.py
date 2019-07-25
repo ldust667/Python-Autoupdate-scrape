@@ -3,11 +3,11 @@ import scrapy
 #creating class implementation of a scrapy.Spider object
 class WaaghSpider(scrapy.Spider):
 	name='waagh'
-	start_urls = ['https://waagh2deth.com']
+	start_urls = ['https://www.games-workshop.com']
 	
 	def parse(self,response):
         	urls = [
-            		'https://waagh2deth.com'
+            		'https://www.games-workshop.com/en-US/Orks-Warboss-Grukks-Boss-Mob-2018'
         	]
         	for url in urls:
             		yield scrapy.Request(url=url, callback=self.parse)

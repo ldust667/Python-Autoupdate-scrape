@@ -16,7 +16,7 @@
 
 <body>
 
-
+<h1> This project is currently undergoing updates- as of 7/18/19 these prices are no longer accurate. </h1>
 
 <?php
 $user = 'waagh';

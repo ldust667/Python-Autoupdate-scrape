@@ -13,7 +13,7 @@ BOT_NAME = 'update_scrape_gw'
 
 SPIDER_MODULES = ['update_scrape_gw.spiders']
 NEWSPIDER_MODULE = 'update_scrape_gw.spiders'
-
+USER_AGENT='waagh2deth.com'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'update_scrape_gw (+http://www.yourdomain.com)'
